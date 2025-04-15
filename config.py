@@ -44,11 +44,11 @@ class Config:
     # 路径参数
     CHECKPOINT_DIR = "checkpoints"
     LOG_DIR = "logs"
-    DATA_DIR = "data"
-    TRAIN_IMAGE_DIR = os.path.join(DATA_DIR, "images", "train2017")
-    VAL_IMAGE_DIR = os.path.join(DATA_DIR, "images", "val2017")
-    TRAIN_ANNOTATION_FILE = os.path.join(DATA_DIR, "annotations/annotations", "captions_train2017.json")
-    VAL_ANNOTATION_FILE = os.path.join(DATA_DIR, "annotations/annotations", "captions_val2017.json")
+    DATA_DIR = "../input/coco2017"
+    TRAIN_IMAGE_DIR = os.path.join(DATA_DIR,"train2017")
+    VAL_IMAGE_DIR = os.path.join(DATA_DIR, "val2017")
+    TRAIN_ANNOTATION_FILE = os.path.join(DATA_DIR, "annotations", "captions_train2017.json")
+    VAL_ANNOTATION_FILE = os.path.join(DATA_DIR, "annotations", "captions_val2017.json")
     
     # 设备参数
     DEVICE = "cuda" if torch.cuda.is_available() else "cpu"

@@ -11,23 +11,8 @@ import os
 from tqdm import tqdm
 from PIL import Image
 import time
-import psutil
-import GPUtil
 from torch.cuda.amp import autocast, GradScaler
 
-def print_gpu_usage():
-    """打印GPU使用情况"""
-    gpus = GPUtil.getGPUs()
-    for gpu in gpus:
-        print(f"GPU {gpu.id}: {gpu.name}")
-        print(f"  Memory Used: {gpu.memoryUsed}MB / {gpu.memoryTotal}MB")
-        print(f"  GPU Utilization: {gpu.load*100}%")
-        print(f"  Temperature: {gpu.temperature}°C")
-
-def print_memory_usage():
-    """打印内存使用情况"""
-    process = psutil.Process()
-    print(f"Memory Usage: {process.memory_info().rss / 1024 / 1024:.2f} MB")
 
 def create_model(visual_dim=2048, compressed_dim=512, dropout_rate=0.6):
     # 创建视觉编码器
@@ -64,7 +49,8 @@ def train(
     gradient_accumulation_steps=4
 ):
     # 创建保存目录
-    os.makedirs(save_dir, exist_ok=True)
+    # os.makedirs(save_dir, exist_ok=True)
+    checkpoint_dir = "../input/checkpoints"
     
     # 设置优化器
     optimizer = optim.AdamW(model.parameters(), lr=learning_rate)
@@ -105,7 +91,7 @@ def train(
                     image_id=image_ids,
                     use_cache=True
                 )
-                
+                return 
                 # 计算损失
                 logits = outputs.logits[:, 1:, :]
                 targets = text_inputs.input_ids[:, 1:]

@@ -3,3 +3,5 @@ __pycache__/
 /data/images/
 /data/__pycache__/
 /data/annotations/
+/checkpoints/
+/train_kaggle.py
